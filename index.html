@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saranya | Creative Developer</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Plus+Jakarta+Sans:wght@300;400;600&display=swap');
+
+        :root {
+            --accent: #3b82f6;
+            --bg-dark: #050505;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: #ffffff;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+            cursor: none; /* Custom cursor implementation */
+        }
+
+        .font-sync { font-family: 'Syncopate', sans-serif; }
+
+        /* Custom Cursor */
+        #cursor {
+            width: 10px; height: 10px; background: white;
+            position: fixed; border-radius: 50%; pointer-events: none; z-index: 10000;
+        }
+        #cursor-follower {
+            width: 40px; height: 40px; border: 1px solid rgba(255,255,255,0.3);
+            position: fixed; border-radius: 50%; pointer-events: none; z-index: 9999;
+            transition: transform 0.1s ease-out;
+        }
+
+        /* Glassmorphic Bento Cards */
+        .bento-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .bento-card:hover {
+            background: rgba(255, 255, 255, 0.07);
+            border-color: var(--accent);
+            transform: translateY(-5px);
+        }
+
+        /* 3D Canvas Background */
+        #bg-canvas {
+            position: fixed; top: 0; left: 0; z-index: -1;
+            filter: brightness(0.6);
+        }
+
+        .skill-tag {
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            color: #60a5fa;
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .reveal { opacity: 0; transform: translateY(30px); }
+    </style>
+</head>
+<body>
+
+    <div id="cursor"></div>
+    <div id="cursor-follower"></div>
+    <canvas id="bg-canvas"></canvas>
+
+    <nav class="fixed w-full z-50 px-8 py-6 flex justify-between items-center mix-blend-difference">
+        <div class="font-sync text-xl tracking-tighter">SARA<span class="text-blue-500">NYA</span></div>
+        <div class="hidden md:flex space-x-10 text-[10px] font-sync uppercase tracking-widest text-gray-400">
+            <a href="#about" class="hover:text-white transition">About</a>
+            <a href="#skills" class="hover:text-white transition">Skills</a>
+            <a href="#work" class="hover:text-white transition">Work</a>
+            <a href="#contact" class="text-blue-400">Contact</a>
+        </div>
+    </nav>
+
+    <section class="h-screen flex flex-col justify-center items-center px-6 text-center">
+        <p class="text-blue-500 font-sync text-xs tracking-[0.5em] mb-4 reveal">AVAILABLE FOR WORK</p>
+        <h1 class="text-6xl md:text-9xl font-sync font-bold mb-8 reveal">
+            SARANYA<span class="text-blue-500">.</span>
+        </h1>
+        <p class="text-gray-400 text-lg md:text-xl max-w-2xl mb-10 reveal">
+            Full-stack developer focused on building <span class="text-white italic">immersive digital products</span> that combine logic with aesthetic excellence.
+        </p>
+        <div class="reveal">
+            <a href="#work" class="bg-white text-black px-10 py-4 rounded-full font-bold hover:scale-110 transition duration-300 inline-block">Explore Projects</a>
+        </div>
+    </section>
+
+    <section id="skills" class="py-32 px-6 max-w-6xl mx-auto">
+        <h2 class="font-sync text-3xl mb-16 reveal">Core_Capabilities</h2>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+            
+            <div class="md:col-span-2 bento-card p-10 flex flex-col justify-between h-64 reveal">
+                <h3 class="text-2xl font-bold uppercase">Frontend <br>Mastery</h3>
+                <div class="flex flex-wrap gap-2">
+                    <span class="skill-tag">React.js</span>
+                    <span class="skill-tag">Next.js</span>
+                    <span class="skill-tag">Three.js</span>
+                    <span class="skill-tag">GSAP</span>
+                </div>
+            </div>
+
+            <div class="bento-card p-8 flex flex-col items-center justify-center reveal">
+                <div class="text-blue-500 text-4xl mb-4">✦</div>
+                <h3 class="font-sync text-xs">UI / UX</h3>
+            </div>
+
+            <div class="bento-card p-8 flex flex-col items-center justify-center reveal">
+                <div class="text-blue-500 text-4xl mb-4">⚙</div>
+                <h3 class="font-sync text-xs">API Design</h3>
+            </div>
+
+            <div class="bento-card p-10 md:col-span-2 reveal">
+                <h3 class="text-xl font-bold mb-4 uppercase">Backend Stack</h3>
+                <div class="flex flex-wrap gap-2">
+                    <span class="skill-tag">Node.js</span>
+                    <span class="skill-tag">PostgreSQL</span>
+                    <span class="skill-tag">AWS</span>
+                    <span class="skill-tag">Python</span>
+                </div>
+            </div>
+
+            <div class="md:col-span-2 bento-card p-10 flex items-center justify-between reveal">
+                <div>
+                    <h3 class="text-xl font-bold uppercase">Problem Solving</h3>
+                    <p class="text-gray-500 text-sm mt-1">Algorithmic optimization & performance</p>
+                </div>
+                <div class="h-12 w-12 rounded-full border border-white/20 flex items-center justify-center">→</div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact" class="py-40 text-center px-6">
+        <h2 class="font-sync text-4xl md:text-6xl mb-12 reveal tracking-tighter">Let's create <br>something <span class="text-blue-500 italic">epic.</span></h2>
+        <a href="mailto:hello@saranya.dev" class="text-2xl md:text-4xl font-light underline underline-offset-8 hover:text-blue-400 transition reveal">hello@saranya.dev</a>
+        <div class="mt-24 flex justify-center space-x-8 text-gray-500 font-sync text-[10px] reveal">
+            <a href="#" class="hover:text-white transition">GITHUB</a>
+            <a href="#" class="hover:text-white transition">LINKEDIN</a>
+            <a href="#" class="hover:text-white transition">TWITTER</a>
+        </div>
+        <p class="mt-10 text-[10px] text-gray-700 tracking-[0.5em] font-sync">© SARANYA 2026 / ALL RIGHTS RESERVED</p>
+    </footer>
+
+    <script>
+        // --- 1. Three.js Background Logic ---
+        const initThree = () => {
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('bg-canvas'), alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+
+            const geometry = new THREE.BufferGeometry();
+            const vertices = [];
+            for (let i = 0; i < 5000; i++) {
+                vertices.push(THREE.MathUtils.randFloatSpread(100)); // x
+                vertices.push(THREE.MathUtils.randFloatSpread(100)); // y
+                vertices.push(THREE.MathUtils.randFloatSpread(100)); // z
+            }
+            geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+            const material = new THREE.PointsMaterial({ color: 0x3b82f6, size: 0.1 });
+            const points = new THREE.Points(geometry, material);
+            scene.add(points);
+
+            camera.position.z = 30;
+
+            const animate = () => {
+                requestAnimationFrame(animate);
+                points.rotation.y += 0.001;
+                points.rotation.x += 0.0005;
+                renderer.render(scene, camera);
+            };
+            animate();
+
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+        };
+
+        // --- 2. GSAP Animations ---
+        gsap.registerPlugin(ScrollTrigger);
+
+        const initGSAP = () => {
+            // Entrance
+            gsap.to(".reveal", {
+                opacity: 1,
+                y: 0,
+                duration: 1.2,
+                stagger: 0.2,
+                ease: "power4.out",
+                delay: 0.5
+            });
+
+            // Scroll Reveal for cards
+            gsap.utils.toArray(".bento-card").forEach(card => {
+                gsap.from(card, {
+                    scrollTrigger: {
+                        trigger: card,
+                        start: "top 90%",
+                    },
+                    opacity: 0,
+                    scale: 0.9,
+                    duration: 1,
+                    ease: "expo.out"
+                });
+            });
+        };
+
+        // --- 3. Custom Cursor Tracking ---
+        const initCursor = () => {
+            const cursor = document.getElementById('cursor');
+            const follower = document.getElementById('cursor-follower');
+            
+            document.addEventListener('mousemove', (e) => {
+                gsap.to(cursor, { x: e.clientX, y: e.clientY, duration: 0 });
+                gsap.to(follower, { x: e.clientX - 15, y: e.clientY - 15, duration: 0.2 });
+            });
+
+            document.querySelectorAll('a, button, .bento-card').forEach(el => {
+                el.addEventListener('mouseenter', () => follower.style.transform = 'scale(2)');
+                el.addEventListener('mouseleave', () => follower.style.transform = 'scale(1)');
+            });
+        };
+
+        // Initialize Everything
+        window.onload = () => {
+            initThree();
+            initGSAP();
+            initCursor();
+        };
+    </script>
+</body>
+</html>
